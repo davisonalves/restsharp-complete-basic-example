@@ -1,5 +1,4 @@
 ﻿using RestSharp;
-using System.Net;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema;
 using restsharp_complete_basic_example.app.data.changeless;
@@ -24,6 +23,22 @@ namespace restsharp_complete_basic_example.test.general
             JObject responseBody = JObject.Parse(response.Content);
             JSchema schemaJson = JSchema.Parse(File.ReadAllText("../../../test/resources/schemas/simulations_not_existent_v1_schema.json"));
 
+
+            Assert.That(responseBody.IsValid(schemaJson, out IList<string> messages), string.Join(",", messages), Is.True);
+        }
+
+        [Test]
+        [Category(CONTRACT)]
+        [Description("Should validate the simulation schema for missing information")]
+        public void ContractOnSimulationWithMissingInformation()
+        {
+            RestRequest request = new RestRequest("/simulations/", Method.Post);
+            request.AddJsonBody(simulationDataFactory.MissingAllInformation());
+
+            RestResponse response = client.Execute(request);
+
+            JObject responseBody = JObject.Parse(response.Content);
+            JSchema schemaJson = JSchema.Parse(File.ReadAllText("../../../test/resources/schemas/simulations_missing_info_v1_schema.json"));
 
             Assert.That(responseBody.IsValid(schemaJson, out IList<string> messages), string.Join(",", messages), Is.True);
         }

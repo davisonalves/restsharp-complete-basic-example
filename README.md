@@ -1,6 +1,6 @@
 # Restsharp Complete Basic Example
 
-Esse projeto foi inspirado por [Rest-Assured Complete Basic Example]("https://github.com/eliasnogueira/restassured-complete-basic-example") do [Elias Nogueira]("https://github.com/eliasnogueira")
+Esse projeto foi inspirado em [Rest-Assured Complete Basic Example](https://github.com/eliasnogueira/restassured-complete-basic-example) do [Elias Nogueira](https://github.com/eliasnogueira)
 
 
 ## Como executar os testes
